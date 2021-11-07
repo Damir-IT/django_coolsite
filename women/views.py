@@ -1,13 +1,21 @@
 
-from django.http.response import Http404
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.shortcuts import render, redirect
+
+from django.http import (
+    
+    HttpResponse,
+    HttpResponseNotFound,
+    Http404,
+
+)
 
 def index(request): #HttpsRequest
     return HttpResponse('Страница приложения women')
 
 def categories(request, catid):
-    print(request.GET)
+    if int(catid) > 3:
+        return redirect('home', permanent=True)
+    
     return HttpResponse(
         
         f'<h1>Статьи по категориям</h1> \
